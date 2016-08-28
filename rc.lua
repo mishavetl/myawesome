@@ -14,6 +14,8 @@ local menubar = require("menubar")
 local kbdcfg = require("kbdcfg")
 -- Volume widget
 local APW = require("apw/widget")
+-- Battery widget
+local battery = require("battery")
 
 -- Load Debian menu entries
 require("debian.menu")
@@ -200,6 +202,7 @@ for s = 1, screen.count() do
     local right_layout = wibox.layout.fixed.horizontal()
     if s == 1 then right_layout:add(wibox.widget.systray()) end
     right_layout:add(kbdcfg.widget)
+    right_layout:add(battery.widget)
     right_layout:add(APW)
     right_layout:add(mytextclock)
     right_layout:add(mylayoutbox[s])
@@ -467,4 +470,6 @@ end)
 
 client.connect_signal("focus", function(c) c.border_color = beautiful.border_focus end)
 client.connect_signal("unfocus", function(c) c.border_color = beautiful.border_normal end)
+
+battery.init("BAT0")
 -- }}}
