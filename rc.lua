@@ -16,7 +16,8 @@ local kbdcfg = require("kbdcfg")
 local APW = require("apw/widget")
 -- Battery widget
 local battery = require("battery")
-
+-- ActiveRAM widget
+local activeram = require("activeram")
 -- Load Debian menu entries
 require("debian.menu")
 
@@ -203,6 +204,7 @@ for s = 1, screen.count() do
     if s == 1 then right_layout:add(wibox.widget.systray()) end
     right_layout:add(kbdcfg.widget)
     right_layout:add(battery.widget)
+    right_layout:add(activeram.widget)
     right_layout:add(APW)
     right_layout:add(mytextclock)
     right_layout:add(mylayoutbox[s])
@@ -472,4 +474,5 @@ client.connect_signal("focus", function(c) c.border_color = beautiful.border_foc
 client.connect_signal("unfocus", function(c) c.border_color = beautiful.border_normal end)
 
 battery.init("BAT0")
+activeram.init()
 -- }}}
