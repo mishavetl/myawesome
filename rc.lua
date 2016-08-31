@@ -231,6 +231,16 @@ root.buttons(awful.util.table.join(
 ))
 -- }}}
 
+-- {{{ Utils
+function execute_in_background(cmd)
+    os.execute(cmd .. " &")
+end
+
+function open_url(url)
+    execute_in_background("firefox " .. url)
+end
+-- }}}
+
 -- {{{ Key bindings
 globalkeys = awful.util.table.join(
     awful.key({ modkey,           }, "Left",   awful.tag.viewprev       ),
@@ -298,7 +308,16 @@ globalkeys = awful.util.table.join(
     -- Volume
     awful.key({ }, "XF86AudioRaiseVolume",  APW.Up),
     awful.key({ }, "XF86AudioLowerVolume",  APW.Down),
-    awful.key({ }, "XF86AudioMute",         APW.ToggleMute)
+    awful.key({ }, "XF86AudioMute",         APW.ToggleMute),
+
+    -- Websites
+    awful.key({ modkey, "Mod1", "Shift" }, "s", function () open_url("https://docs.google.com/presentation") end),
+    awful.key({ modkey, "Mod1", "Shift" }, "v", function () open_url("https://vk.com") end),
+    awful.key({ modkey, "Mod1", "Shift" }, "t", function () open_url("https://translate.google.com") end),
+
+    -- Applications
+    awful.key({ modkey, "Shift" }, "s", function () execute_in_background("unity-control-center") end),
+    awful.key({ modkey, "Shift" }, "f", function () execute_in_background("firefox") end)
 )
 
 clientkeys = awful.util.table.join(
